@@ -1,575 +1,859 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
 <title>幼兒3C使用鑑定事務所</title>
 
+
 <style>
+
+/* =====================================================
+   基本設定
+===================================================== */
+
 * {
     box-sizing: border-box;
 }
 
+html,
 body {
     margin: 0;
-    font-family: "Arial", "Noto Sans TC", sans-serif;
-    background: #f7df9b;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+
+    font-family:
+        "Arial",
+        "Noto Sans TC",
+        "Microsoft JhengHei",
+        sans-serif;
+
     color: #493525;
+
+    background: #f5dc9a;
+
 }
 
 button {
+
     font-family: inherit;
+
     cursor: pointer;
+
 }
 
-/* =========================
+
+/* =====================================================
    共用畫面
-========================= */
+===================================================== */
 
 .screen {
+
     min-height: 100vh;
+
     display: none;
-    padding: 30px;
+
+    padding: 25px;
+
 }
 
 .screen.active {
+
     display: flex;
+
 }
 
-/* =========================
-   主畫面
-========================= */
+
+/* =====================================================
+   起始畫面
+===================================================== */
 
 #homeScreen {
+
+    position: relative;
+
+    overflow: hidden;
+
     flex-direction: column;
+
     justify-content: center;
+
     align-items: center;
 
     background:
-        radial-gradient(circle at 20% 20%, #fff5c7 0 5%, transparent 6%),
-        radial-gradient(circle at 80% 30%, #fff5c7 0 4%, transparent 5%),
-        linear-gradient(#74c9e8, #bce8f4 55%, #e8c879 56%);
+
+        linear-gradient(
+            to bottom,
+            #72c8e8 0%,
+            #bdeaf5 63%,
+            #78b75b 63%,
+            #78b75b 100%
+        );
+
 }
+
+
+/* 太陽 */
+
+#homeScreen::before {
+
+    content: "☀️";
+
+    position: absolute;
+
+    top: 25px;
+
+    right: 7%;
+
+    font-size: 75px;
+
+}
+
+
+/* 雲 */
+
+#homeScreen::after {
+
+    content: "☁️        ☁️";
+
+    position: absolute;
+
+    top: 55px;
+
+    left: 6%;
+
+    font-size: 50px;
+
+    letter-spacing: 30px;
+
+}
+
+
+/* =====================================================
+   事務所外框
+===================================================== */
 
 .office {
-    width: min(900px, 95vw);
-    padding: 35px;
+
+    position: relative;
+
+    z-index: 5;
+
+    width: min(920px, 95vw);
+
+    padding: 25px 30px 35px;
+
     text-align: center;
-    background: #fff3c7;
-    border: 8px solid #8b5739;
-    border-radius: 35px;
-    box-shadow: 0 15px 0 #5f3b29;
+
+    background: #fff1bb;
+
+    border: 8px solid #70452e;
+
+    border-radius: 30px;
+
+    box-shadow:
+
+        0 18px 0 #513323,
+
+        0 28px 35px rgba(0,0,0,0.25);
+
 }
 
+
+/* =====================================================
+   標題
+===================================================== */
+
 .title {
-    font-size: clamp(30px, 5vw, 60px);
-    margin: 0 0 10px;
-    color: #e85d4a;
-    text-shadow: 3px 3px #fff;
+
+    margin: 0 0 5px;
+
+    font-size: clamp(30px, 5vw, 58px);
+
+    color: #e45c4c;
+
+    text-shadow:
+
+        3px 3px 0 white,
+
+        6px 6px 0 #75482f;
+
 }
 
 .subtitle {
-    font-size: clamp(18px, 2.5vw, 28px);
+
+    font-size: clamp(15px, 2.5vw, 24px);
+
+    font-weight: bold;
+
+    color: #65452f;
+
 }
+
+
+/* =====================================================
+   建築物
+===================================================== */
+
+.building {
+
+    position: relative;
+
+    width: 82%;
+
+    height: 320px;
+
+    margin: 35px auto 15px;
+
+    background: #f5d477;
+
+    border: 8px solid #70452e;
+
+    border-radius: 18px 18px 5px 5px;
+
+    box-shadow:
+
+        inset 0 -25px rgba(120,75,40,0.12);
+
+}
+
+
+/* 屋頂 */
+
+.building::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    top: -30px;
+
+    transform: translateX(-50%);
+
+    width: 108%;
+
+    height: 45px;
+
+    background: #e35d4d;
+
+    border: 7px solid #70452e;
+
+    border-radius: 20px 20px 5px 5px;
+
+}
+
+
+/* =====================================================
+   招牌
+===================================================== */
+
+.office-sign {
+
+    position: absolute;
+
+    z-index: 4;
+
+    left: 50%;
+
+    top: 22px;
+
+    transform: translateX(-50%);
+
+    width: 60%;
+
+    padding: 10px;
+
+    background: #fff8d7;
+
+    border: 6px solid #70452e;
+
+    border-radius: 15px;
+
+    font-size: clamp(15px, 2vw, 23px);
+
+    font-weight: bold;
+
+    color: #d85448;
+
+}
+
+
+/* =====================================================
+   窗戶
+===================================================== */
+
+.window {
+
+    position: absolute;
+
+    top: 100px;
+
+    width: 95px;
+
+    height: 80px;
+
+    background: #75cce7;
+
+    border: 7px solid #70452e;
+
+    border-radius: 10px;
+
+}
+
+.window.left {
+
+    left: 7%;
+
+}
+
+.window.right {
+
+    right: 7%;
+
+}
+
+
+/* 窗戶十字 */
+
+.window::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 0;
+
+    width: 6px;
+
+    height: 100%;
+
+    background: #70452e;
+
+    transform: translateX(-50%);
+
+}
+
+.window::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    top: 50%;
+
+    width: 100%;
+
+    height: 6px;
+
+    background: #70452e;
+
+    transform: translateY(-50%);
+
+}
+
+
+/* =====================================================
+   大門
+===================================================== */
 
 .door {
-    margin: 30px auto;
-    width: 260px;
-    height: 360px;
-    background: #8b5a3c;
-    border: 12px solid #633d29;
-    border-radius: 12px 12px 0 0;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
+
+    position: absolute;
+
+    z-index: 5;
+
+    left: 50%;
+
+    bottom: 0;
+
+    transform: translateX(-50%);
+
+    width: 155px;
+
+    height: 215px;
+
+    background: #75472f;
+
+    border: 8px solid #4c3022;
+
+    border-bottom: none;
+
+    border-radius: 75px 75px 0 0;
+
 }
 
-/* 機器人 */
+
+/* 門上的玻璃 */
+
+.door-window {
+
+    position: absolute;
+
+    top: 18px;
+
+    left: 25px;
+
+    width: 89px;
+
+    height: 70px;
+
+    background: #72cbe8;
+
+    border: 5px solid #4c3022;
+
+    border-radius: 12px;
+
+}
+
+
+/* 門把 */
+
+.door-handle {
+
+    position: absolute;
+
+    right: 16px;
+
+    top: 115px;
+
+    width: 14px;
+
+    height: 14px;
+
+    background: #f4c542;
+
+    border: 3px solid #4c3022;
+
+    border-radius: 50%;
+
+}
+
+
+/* =====================================================
+   機器人
+===================================================== */
 
 .robot {
-    width: 130px;
-    height: 180px;
+
     position: absolute;
-    bottom: 0;
-    animation: robotWalk 2s ease-in-out infinite alternate;
+
+    z-index: 10;
+
+    width: 120px;
+
+    height: 180px;
+
+    left: 50%;
+
+    bottom: -5px;
+
+    transform: translateX(-50%);
+
+    animation:
+
+        robotWalkOut 2.4s ease-out forwards,
+
+        robotIdle 1.5s 2.4s ease-in-out infinite alternate;
+
 }
+
+
+/* 機器人身體 */
 
 .robot-body {
+
     position: absolute;
-    bottom: 15px;
+
     left: 20px;
-    width: 90px;
+
+    bottom: 25px;
+
+    width: 80px;
+
     height: 90px;
-    background: #e7a72e;
-    border: 6px solid #5c4b3c;
-    border-radius: 25px 25px 15px 15px;
+
+    background: #e5a52c;
+
+    border: 6px solid #4f4a42;
+
+    border-radius: 24px 24px 15px 15px;
+
+    box-shadow:
+
+        inset 0 -10px rgba(0,0,0,0.12);
+
 }
+
+
+/* 機器人螢幕 */
 
 .robot-screen {
+
     position: absolute;
+
+    left: 9px;
+
     top: 12px;
-    left: 12px;
-    width: 66px;
-    height: 43px;
+
+    width: 62px;
+
+    height: 44px;
+
     background: #263238;
-    border: 4px solid #444;
-    border-radius: 8px;
+
+    border: 4px solid #555;
+
+    border-radius: 9px;
+
     display: flex;
+
     justify-content: center;
+
     align-items: center;
+
     gap: 8px;
+
 }
+
+
+/* 眼睛 */
 
 .eye {
-    width: 12px;
+
+    width: 11px;
+
     height: 18px;
+
     background: #7de8ff;
+
     border-radius: 50%;
+
     animation: blink 3s infinite;
+
 }
 
+
+/* 輪子 */
+
 .robot-wheel {
+
     position: absolute;
+
     bottom: 0;
-    width: 38px;
-    height: 38px;
+
+    width: 42px;
+
+    height: 42px;
+
     background: #333;
-    border: 5px solid #111;
+
+    border: 6px solid #151515;
+
     border-radius: 50%;
+
 }
 
 .robot-wheel.left {
+
     left: 0;
+
 }
 
 .robot-wheel.right {
+
     right: 0;
+
 }
 
+
+/* 手臂 */
+
 .robot-arm {
+
     position: absolute;
-    width: 35px;
+
+    top: 72px;
+
+    width: 38px;
+
     height: 12px;
+
     background: #777;
-    top: 75px;
+
+    border-radius: 10px;
+
 }
 
 .robot-arm.left {
-    left: -25px;
+
+    left: -20px;
+
     transform: rotate(25deg);
+
 }
 
 .robot-arm.right {
-    right: -25px;
+
+    right: -20px;
+
     transform: rotate(-25deg);
+
 }
+
+
+/* =====================================================
+   對話框
+===================================================== */
 
 .speech {
-    background: white;
-    padding: 18px 25px;
-    border: 5px solid #493525;
-    border-radius: 25px;
-    font-size: 20px;
-    margin: 20px auto;
-    max-width: 700px;
+
     position: relative;
-}
 
-.start-btn,
-.next-btn {
-    background: #ef6b5b;
-    color: white;
-    border: none;
-    padding: 18px 45px;
-    font-size: 24px;
+    z-index: 20;
+
+    max-width: 720px;
+
+    margin: 20px auto;
+
+    padding: 18px 25px;
+
+    background: white;
+
+    border: 5px solid #493525;
+
+    border-radius: 25px;
+
+    font-size: clamp(17px, 2.5vw, 24px);
+
     font-weight: bold;
+
+    box-shadow:
+
+        5px 6px 0 rgba(0,0,0,0.2);
+
+    animation:
+
+        speechAppear 0.8s 2.1s both;
+
+}
+
+
+/* =====================================================
+   開始按鈕
+===================================================== */
+
+.start-btn {
+
+    position: relative;
+
+    z-index: 30;
+
+    border: none;
+
+    padding: 17px 45px;
+
+    background: #ed6857;
+
+    color: white;
+
+    font-size: clamp(20px, 3vw, 27px);
+
+    font-weight: bold;
+
     border-radius: 50px;
+
     box-shadow: 0 7px 0 #a83d32;
-    transition: 0.15s;
+
+    transition: transform 0.15s, box-shadow 0.15s;
+
 }
 
-.start-btn:hover,
-.next-btn:hover {
+.start-btn:hover {
+
     transform: translateY(3px);
+
     box-shadow: 0 4px 0 #a83d32;
+
 }
 
-/* =========================
+.start-btn:active {
+
+    transform: translateY(6px);
+
+    box-shadow: 0 1px 0 #a83d32;
+
+}
+
+
+/* =====================================================
    案件畫面
-========================= */
+===================================================== */
 
 #caseScreen {
+
     flex-direction: column;
+
     align-items: center;
+
     background:
-        linear-gradient(#9bd7f0 0 18%, #d9c091 18% 100%);
+
+        linear-gradient(
+            #9bd7f0 0 18%,
+            #d9c091 18% 100%
+        );
+
 }
 
+
+/* 上方 */
+
 .office-top {
+
     width: 100%;
+
     max-width: 1100px;
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
+
     margin-bottom: 20px;
+
 }
 
 .office-name {
+
     font-size: clamp(20px, 3vw, 34px);
+
     font-weight: bold;
+
 }
+
+
+/* =====================================================
+   倒數計時器
+===================================================== */
 
 .timer {
-    background: #fff;
-    border: 6px solid #493525;
-    border-radius: 50%;
+
     width: 95px;
+
     height: 95px;
+
     display: flex;
+
     justify-content: center;
+
     align-items: center;
+
+    background: white;
+
+    border: 6px solid #493525;
+
+    border-radius: 50%;
+
     font-size: 32px;
+
     font-weight: bold;
+
 }
 
+
+/* =====================================================
+   個案卡片
+===================================================== */
+
 .case-card {
+
     width: min(1000px, 95vw);
-    background: #fff9df;
-    border: 8px solid #815536;
-    border-radius: 30px;
+
     padding: clamp(20px, 4vw, 45px);
+
+    background: #fff9df;
+
+    border: 8px solid #815536;
+
+    border-radius: 30px;
+
     box-shadow: 0 12px 0 #573a29;
+
 }
 
 .case-number {
+
     font-size: 22px;
+
     color: #c76b45;
+
     font-weight: bold;
+
 }
 
 .case-title {
+
     font-size: clamp(25px, 4vw, 42px);
+
     margin: 10px 0 25px;
+
 }
 
 .case-info {
-    background: #fff;
-    border-radius: 20px;
+
     padding: 25px;
-    font-size: clamp(20px, 3vw, 30px);
-    line-height: 1.7;
+
+    background: white;
+
+    border-radius: 20px;
+
     border: 3px dashed #d49a50;
+
+    font-size: clamp(20px, 3vw, 30px);
+
+    line-height: 1.7;
+
 }
 
+
+/* =====================================================
+   選項
+===================================================== */
+
 .vote-question {
-    text-align: center;
-    font-size: 25px;
-    font-weight: bold;
+
     margin: 30px 0 15px;
+
+    text-align: center;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
 }
 
 .options {
+
     display: grid;
+
     grid-template-columns: repeat(3, 1fr);
+
     gap: 18px;
-}
-
-.option {
-    min-height: 100px;
-    border: none;
-    border-radius: 25px;
-    font-size: clamp(20px, 3vw, 30px);
-    font-weight: bold;
-    color: white;
-    box-shadow: 0 8px 0 rgba(0,0,0,0.25);
-    transition: 0.15s;
-}
-
-.option:hover {
-    transform: translateY(4px);
-    box-shadow: 0 4px 0 rgba(0,0,0,0.25);
-}
-
-.too-much {
-    background: #e95757;
-}
-
-.okay {
-    background: #e8c84b;
-    color: #493525;
-}
-
-.good {
-    background: #59b96b;
-}
-
-.option.selected {
-    outline: 8px solid white;
-    transform: scale(1.03);
-}
-
-.results {
-    margin-top: 30px;
-    display: none;
-}
-
-.results.show {
-    display: block;
-}
-
-.result-row {
-    margin: 15px 0;
-}
-
-.result-label {
-    display: flex;
-    justify-content: space-between;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.bar {
-    height: 35px;
-    border-radius: 20px;
-    background: #ddd;
-    overflow: hidden;
-}
-
-.bar-inner {
-    height: 100%;
-    width: 0%;
-    transition: width 0.8s ease;
-}
-
-.bar-red {
-    background: #e95757;
-}
-
-.bar-yellow {
-    background: #e8c84b;
-}
-
-.bar-green {
-    background: #59b96b;
-}
-
-.next-container {
-    text-align: center;
-    margin-top: 30px;
-}
-
-/* =========================
-   手機提示
-========================= */
-
-.mobile-hint {
-    margin-top: 25px;
-    text-align: center;
-    font-size: 16px;
-    opacity: 0.75;
-}
-
-/* =========================
-   動畫
-========================= */
-
-@keyframes robotWalk {
-    from {
-        transform: translateX(-10px);
-    }
-    to {
-        transform: translateX(10px);
-    }
-}
-
-@keyframes blink {
-    0%, 95%, 100% {
-        transform: scaleY(1);
-    }
-    97% {
-        transform: scaleY(0.1);
-    }
-}
-
-/* =========================
-   RWD
-========================= */
-
-@media (max-width: 700px) {
-    .screen {
-        padding: 15px;
-    }
-
-    .options {
-        grid-template-columns: 1fr;
-    }
-
-    .option {
-        min-height: 75px;
-    }
-
-    .office-top {
-        align-items: flex-start;
-    }
-
-    .timer {
-        width: 70px;
-        height: 70px;
-        font-size: 24px;
-        border-width: 4px;
-    }
-
-    .case-card {
-        border-width: 5px;
-    }
-}
-</style>
-</head>
-
-<body>
-
-<!-- =========================
-     主畫面
-========================= -->
-
-<section id="homeScreen" class="screen active">
-
-    <div class="office">
-
-        <h1 class="title">
-            🧸 幼兒3C使用鑑定事務所
-        </h1>
-
-        <p class="subtitle">
-            CHILDREN 3C DETECTIVE OFFICE
-        </p>
-
-        <div class="door">
-
-            <div class="robot">
-
-                <div class="robot-body">
-
-                    <div class="robot-screen">
-                        <div class="eye"></div>
-                        <div class="eye"></div>
-                    </div>
-
-                    <div class="robot-arm left"></div>
-                    <div class="robot-arm right"></div>
-
-                </div>
-
-                <div class="robot-wheel left"></div>
-                <div class="robot-wheel right"></div>
-
-            </div>
-
-        </div>
-
-        <div class="speech">
-            🤖「歡迎入職本事務所，事不宜遲我們趕快上工吧！」
-        </div>
-
-        <button class="start-btn" onclick="startGame()">
-            🚪 進入事務所
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     案件畫面
-========================= -->
-
-<section id="caseScreen" class="screen">
-
-    <div class="office-top">
-
-        <div class="office-name">
-            🏢 幼兒3C使用鑑定事務所
-        </div>
-
-        <div class="timer" id="timer">
-            30
-        </div>
-
-    </div>
-
-
-    <div class="case-card">
-
-        <div class="case-number" id="caseNumber">
-            CASE 01
-        </div>
-
-        <h2 class="case-title">
-            📋 個案資訊
-        </h2>
-
-        <div class="case-info" id="caseInfo">
-        </div>
-
-        <div class="vote-question">
-            🤔 你認為這個孩子的3C使用情況……
-        </div>
-
-        <div class="options">
-
-            <button
-                class="option too-much"
-                onclick="vote('tooMuch')">
-                🔴 太多了
-            </button>
-
-            <button
-                class="option okay"
-                onclick="vote('okay')">
-                🟡 還可以
-            </button>
-
-            <button
-                class="option good"
-                onclick="vote('good')">
-                🟢 完全喔虧
-            </button>
-
-        </div>
-
-
-        <div class="results" id="results">
-
-            <h2>📊 本單投票結果</h2>
-
-            <div class="result-row">
-
-                <div class="result-label">
-                    <span>🔴 太多了</span>
-                    <span id="tooMuchCount">0 人</span>
-                </div>
-
-                <div class="bar">
-                    <div
-                        class="bar-inner bar-red"
-                        id="tooMuchBar">
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="result-row">
-
-                <div class="result-label">
-                    <span>🟡 還可以</span>
-                    <span id="okayCount">0 人</span>
-                </div>
-
-                <div class="bar">
-                    <div
-                        class="bar-inner bar-yellow"
-                        id="okayBar">
-      
+    
